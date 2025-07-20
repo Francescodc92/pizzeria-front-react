@@ -1,6 +1,7 @@
 import { BannerSectionComponent } from "./banner-section/banner-section-component"
 import { ComboSectionComponents } from "./combo-section/combo-section-component"
 import { EmployeeSectionComponent } from "./employee-section/employee-section-component"
+import { EventSectionComponent } from "./events-section/event-section-component"
 import { ImageSectionComponent } from "./image-section/image-section-component"
 import { PizzasSectionComponent } from "./pizzas-section/pizzas-section"
 import { SponsorsSectionComponent } from "./sponsors-section/sponsors-section-component"
@@ -16,6 +17,7 @@ export const MainComponent = () => {
             <EmployeeSectionComponent />
             <SponsorsSectionComponent />
             <PizzasSectionComponent />
+            <EventSectionComponent />
         </main>
     )
 }
