@@ -4,6 +4,7 @@ import { EmployeeSectionComponent } from "./employee-section/employee-section-co
 import { EventSectionComponent } from "./events-section/event-section-component"
 import { ImageSectionComponent } from "./image-section/image-section-component"
 import { PizzasSectionComponent } from "./pizzas-section/pizzas-section"
+import { ReservationsSectionComponent } from "./reservation-section/reservation-section"
 import { SponsorsSectionComponent } from "./sponsors-section/sponsors-section-component"
 import { TestimonialsSectionComponent } from "./testimonials-section/testimonial-section-component"
 
@@ -18,6 +19,7 @@ export const MainComponent = () => {
             <SponsorsSectionComponent />
             <PizzasSectionComponent />
             <EventSectionComponent />
+            <ReservationsSectionComponent />
         </main>
     )
 }
