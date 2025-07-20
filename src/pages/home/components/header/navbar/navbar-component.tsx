@@ -59,8 +59,7 @@ export const NavBarComponent = () => {
                 </div>
 
                 <div
-                    className={`items-center justify-between md:flex md:w-auto absolute md:static md:opacity-100 bottom-0 left-0 translate-y-full md:translate-0 w-full transition  ${isOpen ? "translate-x-full opacity-0 " : "translate-x-0 opacity-100"
-                        }`}
+                    className={`items-center justify-between md:flex md:w-auto absolute md:static md:opacity-100 bottom-0 left-0 translate-y-full md:translate-0 w-full transition  ${isOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
                 >
                     <ul className="flex flex-col gap-5 md:gap-0 py-4 px-1 md:p-0 rounded-b-lg rtl:space-x-reverse md:flex-row md:items-center md:mt-0 md:border-0 bg-zinc-800 md:bg-transparent  text-white">
                         {NavItemsArray.slice(0, 2).map((item, index) => {
@@ -94,7 +93,7 @@ export const NavBarComponent = () => {
                             );
                         })}
                         <li className="flex items-center justify-center">
-                            <button className="group flex items-center justify-center hover:text-primary  gap-1 py-2 px-3 text-white rounded md:bg-transparent uppercase">
+                            <button className="group flex items-center justify-center hover:text-primary  gap-1 py-2 px-3 text-white rounded md:bg-transparent uppercase cursor-pointer">
                                 <div className="relative flex gap-1 items-center">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
