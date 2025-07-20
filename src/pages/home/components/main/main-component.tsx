@@ -1,5 +1,6 @@
 import { BannerSectionComponent } from "./banner-section/banner-section-component"
 import { ComboSectionComponents } from "./combo-section/combo-section-component"
+import { EmployeeSectionComponent } from "./employee-section/employee-section-component"
 import { ImageSectionComponent } from "./image-section/image-section-component"
 import { TestimonialsSectionComponent } from "./testimonials-section/testimonial-section-component"
 
@@ -10,6 +11,7 @@ export const MainComponent = () => {
             <TestimonialsSectionComponent />
             <ComboSectionComponents />
             <ImageSectionComponent />
+            <EmployeeSectionComponent />
         </main>
     )
 }
