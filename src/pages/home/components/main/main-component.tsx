@@ -2,6 +2,7 @@ import { BannerSectionComponent } from "./banner-section/banner-section-componen
 import { ComboSectionComponents } from "./combo-section/combo-section-component"
 import { EmployeeSectionComponent } from "./employee-section/employee-section-component"
 import { ImageSectionComponent } from "./image-section/image-section-component"
+import { PizzasSectionComponent } from "./pizzas-section/pizzas-section"
 import { SponsorsSectionComponent } from "./sponsors-section/sponsors-section-component"
 import { TestimonialsSectionComponent } from "./testimonials-section/testimonial-section-component"
 
@@ -14,6 +15,7 @@ export const MainComponent = () => {
             <ImageSectionComponent />
             <EmployeeSectionComponent />
             <SponsorsSectionComponent />
+            <PizzasSectionComponent />
         </main>
     )
 }
