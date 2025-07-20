@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+:root {
+    --bg-cielo: url('/src/assets/img/cielostellato.PNG');
+    --urban: url('/src/assets/img/h3-rev-img-5.png');
+    --taste: url('/src/assets/img/h3-rev-img-3.png');
+    --crust: url('/src/assets/img/h3-rev-img-1.png');
+    --testimonials: url('/src/assets/img/h3-testimonials-bckgrnd.jpg');
+    --bigImg: url('/src/assets/img/h3-background-img.jpg');
+    --events: url('/src/assets/img/h3-img-5a.jpg');
+    --reservations: url('/src/assets/img/h3-background-img-3.jpg');
+    --footerImg: url('/src/assets/img/footer-img-1.jpg');
+    --footerLogo: url('/src/assets/img/footer-bottom-img.png');
+}
+
+
+@theme {
+    --color-primary: #C83B1A;
+    --font-primary: 'Poppins', sans-serif;
+}
+
+
+@layer utilities {
+    .bg-cielo {
+        background-image: var(--bg-cielo);
+    }
+
+    .bg-urban {
+        background-image: var(--urban);
+    }
+
+    .bg-taste {
+        background-image: var(--taste);
+    }
+
+    .bg-crust {
+        background-image: var(--crust);
+    }
+
+    .bg-testimonials {
+        background-image: var(--testimonials);
+    }
+
+    .bg-bigImg {
+        background-image: var(--bigImg);
+    }
+
+    .bg-events {
+        background-image: var(--events);
+    }
+
+    .bg-reservations {
+        background-image: var(--reservations);
+    }
+
+    .bg-footerImg {
+        background-image: var(--footerImg);
+    }
+
+    .bg-footerLogo {
+        background-image: var(--footerLogo);
+    }
+}
