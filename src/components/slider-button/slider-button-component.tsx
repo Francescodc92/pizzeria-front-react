@@ -1,4 +1,4 @@
-import { sliderFunction } from "../../../../../utils/slider/slider-functions";
+import { sliderFunction } from "../../utils/slider/slider-functions";
 
 interface SliderButtonComponentProps {
     changeIndex: (index: number) => void;
