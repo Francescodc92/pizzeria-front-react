@@ -1,5 +1,5 @@
-import type { Pizza } from "../../../../../types/pizzas";
-import { formatCurrency } from "../../../../../utils/format-currency/format-currency";
+import type { Pizza } from "@/types/pizzas";
+import { formatCurrency } from "@/utils/format-currency/format-currency";
 
 interface PizzaComponentProps {
     pizza: Pizza;

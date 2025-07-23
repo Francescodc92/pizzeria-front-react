@@ -1,5 +1,5 @@
+import { SliderButtonComponent } from "@/components/slider-button/slider-button-component";
 import { useState } from "react";
-import { SliderButtonComponent } from "../../../../../components/slider-button/slider-button-component";
 
 const sliderHeaderArray = [
     {

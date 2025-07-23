@@ -1,3 +1,4 @@
+import { useToggleModalStore } from "@/store/modal-login";
 import { useState } from "react";
 import { NavItemsComponent } from "./nav-item-component";
 
@@ -40,6 +41,7 @@ const NavItemsArray = [
 
 export const NavBarComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const toggleLoginModal = useToggleModalStore(state => state.toggleLoginModal)
     return (
         <nav className="fixed top-0 w-full z-20 bg-zinc-800">
             <div className=" max-w-6xl flex items-center justify-between mx-auto px-2 py-2 flex-wrap md:flex-nowrap">
@@ -134,6 +136,7 @@ export const NavBarComponent = () => {
                     <button
                         type="button"
                         className="bg-primary text-white px-3 py-1 rounded  uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70"
+                        onClick={toggleLoginModal}
                     >
                         Accedi
                     </button>
