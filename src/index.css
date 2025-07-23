@@ -3,6 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
 :root {
     --bg-cielo: url('/src/assets/img/cielostellato.PNG');
     --urban: url('/src/assets/img/h3-rev-img-5.png');
@@ -47,6 +48,11 @@
     --sidebar-border: oklch(0.92 0.004 286.32);
     --sidebar-ring: oklch(0.705 0.015 286.067);
 }
+
+html {
+    @apply scroll-smooth;
+}
+
 
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);

@@ -6,7 +6,7 @@ import { NavItemsComponent } from "./nav-item-component";
 
 const NavItemsArray = [
     {
-        path: "/home",
+        path: "/",
         text: "Home",
         svg: (
             <svg
@@ -20,17 +20,17 @@ const NavItemsArray = [
         ),
     },
     {
-        path: "/promozioni",
+        path: "#menu",
         text: "Promozioni",
         svg: null,
     },
     {
-        path: "/menu",
+        path: "/pizzas",
         text: "Menu",
         svg: null,
     },
     {
-        path: "/eventi",
+        path: "#events",
         text: "Eventi",
         svg: null,
     },

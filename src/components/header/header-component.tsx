@@ -1,5 +1,5 @@
-import { useToggleModalStore } from "../../../../store/modal-login";
-import { useToggleRegisterModalStore } from "../../../../store/modal-register";
+import { useToggleModalStore } from "@/store/modal-login";
+import { useToggleRegisterModalStore } from "@/store/modal-register";
 import { LoginModalComponent } from "./auth/login-modal-component";
 import { NavBarComponent } from "./navbar/navbar-component";
 import { SliderComponent } from "./slider/slider-component";
