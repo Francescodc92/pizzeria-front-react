@@ -1,6 +1,6 @@
+import { SwiperComponent } from "@/components/swiper-component/swiper-component";
+import { usePizzas } from "@/http/use-pizzas";
 import { SwiperSlide } from "swiper/react";
-import { SwiperComponent } from "../../../../../components/swiper-componet/swiper-component";
-import { usePizzas } from "../../../../../http/use-pizzas";
 import { PizzaComponent } from "./pizza-component";
 
 

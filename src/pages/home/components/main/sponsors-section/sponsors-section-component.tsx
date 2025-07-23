@@ -1,5 +1,5 @@
+import { SwiperComponent } from "@/components/swiper-component/swiper-component";
 import { SwiperSlide } from "swiper/react";
-import { SwiperComponent } from "../../../../../components/swiper-componet/swiper-component";
 import { SponsorComponent } from "./sponsor-component";
 
 
