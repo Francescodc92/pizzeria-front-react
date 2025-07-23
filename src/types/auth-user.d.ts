@@ -1,11 +1,16 @@
-export type AuthUserRequest = {
+export type LoginUserRequest = {
     email: string,
     password: string
 }
 
-export type AuthUserResponse = {
+export type LoginUserResponse = {
     message?: string,
     loggedUser?: User
+    error?: string
+}
+
+export type LogoutUserResponse = {
+    message?: string,
     error?: string
 }
 

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useAuthUser } from '@/http/use-auth-user';
+import { useLoginUser } from '@/http/use-auth-user';
 import { useSanctumToken } from '@/http/use-sanctum-token';
 import { useToggleModalStore } from "@/store/modal-login";
 import { useToggleRegisterModalStore } from "@/store/modal-register";
@@ -19,7 +19,7 @@ type LoginUserFormData = z.infer<typeof loginUserSchema>
 export const LoginModalComponent = () => {
     const toggleLoginModal = useToggleModalStore(state => state.toggleLoginModal)
     const toggleRegisterModal = useToggleRegisterModalStore(state => state.toggleRegisterModal)
-    const { mutateAsync: login } = useAuthUser()
+    const { mutateAsync: login } = useLoginUser()
     const { isSuccess } = useSanctumToken()
 
     const loginUserForm = useForm<LoginUserFormData>({
@@ -40,6 +40,7 @@ export const LoginModalComponent = () => {
             try {
                 await login(data)
                 loginUserForm.reset();
+                toggleLoginModal()
             } catch (error) {
                 if (error instanceof Error) {
                     console.log(error.message);

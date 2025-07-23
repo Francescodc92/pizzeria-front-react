@@ -1,3 +1,4 @@
+import { useLogoutUser } from "@/http/use-auth-user";
 import { useToggleModalStore } from "@/store/modal-login";
 import { useUserStore } from "@/store/user-logged";
 import { useState } from "react";
@@ -44,6 +45,12 @@ export const NavBarComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
     const loggedUser = useUserStore(state => state.loggedUser)
     const toggleLoginModal = useToggleModalStore(state => state.toggleLoginModal)
+    const { mutateAsync: logoutUser } = useLogoutUser()
+
+    const handleUserLogout = async () => {
+        await logoutUser()
+    }
+
     return (
         <nav className="fixed top-0 w-full z-20 bg-zinc-800">
             <div className=" max-w-6xl flex items-center justify-between mx-auto px-2 py-2 flex-wrap md:flex-nowrap">
@@ -135,43 +142,48 @@ export const NavBarComponent = () => {
                 </div>
                 {/* <!--end responsive navigation--> */}
                 <div className="flex items-center mx-3 md:mx-0 gap-2">
-                    <button
-                        type="button"
-                        className={"bg-primary text-white px-3 py-1 rounded  uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70 " + loggedUser ? "hidden" : ""}
-                        onClick={toggleLoginModal}
-                    >
-                        Accedi
-                    </button>
+                    {!loggedUser && (
+                        <button
+                            type="button"
+                            className="bg-primary text-white px-3 py-1 rounded  uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70 "
+                            onClick={toggleLoginModal}
+                        >
+                            Accedi
+                        </button>
+                    )}
 
-                    <ul className={loggedUser ? "" : "hidden"}>
-                        <li className="text-primary uppercase hover:text-primary/70 p-2 underline cursor-pointer relative">
-                            <span> {loggedUser?.firstName} </span>
-                            <div
-                                className="w-[180px] bg-black/60 px-5 py-3 rounded-lg z-50 absolute top-10 lg:-left-2 -left-[100px] transition-all duration-300"
-                                v-if="logoutModalOpen"
-                            >
-                                <ul className="flex flex-col gap-3">
-                                    <li>
-                                        <button className="w-full bg-primary text-white px-3 py-2 uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70">
-                                            Logout
-                                        </button>
-                                    </li>
-                                    <li
-                                        v-if="store.user.role.includes('admin')"
-                                        className="w-full"
-                                    >
-                                        <a
-                                            className="bg-primary w-full block text-white px-3 py-2 text-center uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70"
-                                            href="http://localhost/admin/pizzas"
-                                            target="_blank"
+                    {loggedUser && (
+                        <ul className={loggedUser ? "" : "hidden"}>
+                            <li className="text-primary uppercase hover:text-primary/70 p-2 underline cursor-pointer relative">
+                                <span> {loggedUser?.firstName} </span>
+                                <div
+                                    className="w-[180px] bg-black/60 px-5 py-3 rounded-lg z-50 absolute top-10 lg:-left-2 -left-[100px] transition-all duration-300"
+                                    v-if="logoutModalOpen"
+                                >
+                                    <ul className="flex flex-col gap-3">
+                                        <li>
+                                            <button onClick={handleUserLogout} className="w-full bg-primary text-white px-3 py-2 uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70">
+                                                Logout
+                                            </button>
+                                        </li>
+                                        <li
+                                            v-if="store.user.role.includes('admin')"
+                                            className="w-full"
                                         >
-                                            Area Admin
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+                                            <a
+                                                className="bg-primary w-full block text-white px-3 py-2 text-center uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70"
+                                                href="http://localhost/admin/pizzas"
+                                                target="_blank"
+                                            >
+                                                Area Admin
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    )}
+
                     <button
                         type="button"
                         className="inline-flex items-center p-2 w-10 h-10 justify-center   rounded-lg md:hidden  focus:outline-none focus:ring-2  text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
