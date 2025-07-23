@@ -7,7 +7,6 @@ import { SliderComponent } from "./slider/slider-component";
 export const HeaderComponent = () => {
   const isModalLoginOpen = useToggleModalStore((state) => state.isModalLoginOpen)
   const isModalRegisterOpen = useToggleRegisterModalStore((state) => state.isModalRegisterOpen)
-
   return (
     <header className="bg-cielo bg-center bg-cover bg-no-repeat relative">
       <NavBarComponent />

@@ -1,4 +1,5 @@
 import { useToggleModalStore } from "@/store/modal-login";
+import { useUserStore } from "@/store/user-logged";
 import { useState } from "react";
 import { NavItemsComponent } from "./nav-item-component";
 
@@ -41,6 +42,7 @@ const NavItemsArray = [
 
 export const NavBarComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const loggedUser = useUserStore(state => state.loggedUser)
     const toggleLoginModal = useToggleModalStore(state => state.toggleLoginModal)
     return (
         <nav className="fixed top-0 w-full z-20 bg-zinc-800">
@@ -135,15 +137,15 @@ export const NavBarComponent = () => {
                 <div className="flex items-center mx-3 md:mx-0 gap-2">
                     <button
                         type="button"
-                        className="bg-primary text-white px-3 py-1 rounded  uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70"
+                        className={"bg-primary text-white px-3 py-1 rounded  uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70 " + loggedUser ? "hidden" : ""}
                         onClick={toggleLoginModal}
                     >
                         Accedi
                     </button>
 
-                    <ul className="hidden">
+                    <ul className={loggedUser ? "" : "hidden"}>
                         <li className="text-primary uppercase hover:text-primary/70 p-2 underline cursor-pointer relative">
-                            <span>{/* {{ store.user.firstName }} */} ciao</span>
+                            <span> {loggedUser?.firstName} </span>
                             <div
                                 className="w-[180px] bg-black/60 px-5 py-3 rounded-lg z-50 absolute top-10 lg:-left-2 -left-[100px] transition-all duration-300"
                                 v-if="logoutModalOpen"
@@ -195,6 +197,6 @@ export const NavBarComponent = () => {
                 </div>
                 {/* <!--end buttons --> */}
             </div>
-        </nav>
+        </nav >
     );
 };
