@@ -1,3 +1,5 @@
+import { MainPizzaComponent } from "./components/main/main"
+
 export const PizzasPage = () => {
-    return <h1>Pizzas</h1>
+    return <MainPizzaComponent />
 }

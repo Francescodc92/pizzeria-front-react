@@ -1,14 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import type { PizzaResponse } from "../types/pizzas";
+import type { PaginatedPizzasResponse } from "@/types/pizzas"
+import { useQuery } from "@tanstack/react-query"
 
-export function usePizzas() {
+export function usePizzas(currentPizzaPage: number) {
     return useQuery({
-        queryKey: ['get-rooms'],
+        queryKey: ['get-pizzas', currentPizzaPage],
         queryFn: async () => {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/pizzas-with-discount`)
-            const result: PizzaResponse = await response.json()
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/pizzas?page=${currentPizzaPage}`)
 
-            return result.data
+            if (!response.ok) throw new Error("Errore durante recupero delle pizze!")
+
+            const result: PaginatedPizzasResponse = await response.json()
+            return result
         },
     })
 }
