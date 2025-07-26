@@ -1,4 +1,6 @@
 import { useLogoutUser } from "@/http/use-auth-user";
+import { useCartStore } from "@/store/cart";
+import { useToggleCartModalStore } from "@/store/modal-cart";
 import { useToggleModalStore } from "@/store/modal-login";
 import { useUserStore } from "@/store/user-logged";
 import { useState } from "react";
@@ -45,7 +47,10 @@ export const NavBarComponent = () => {
     const [isOpen, setIsOpen] = useState(false);
     const loggedUser = useUserStore(state => state.loggedUser)
     const toggleLoginModal = useToggleModalStore(state => state.toggleLoginModal)
+    const toggleCartModal = useToggleCartModalStore(state => state.toggleCartModal)
     const { mutateAsync: logoutUser } = useLogoutUser()
+    const cart = useCartStore(state => state.cart);
+    const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
     const handleUserLogout = async () => {
         await logoutUser()
@@ -104,7 +109,8 @@ export const NavBarComponent = () => {
                             );
                         })}
                         <li className="flex items-center justify-center">
-                            <button className="group flex items-center justify-center hover:text-primary  gap-1 py-2 px-3 text-white rounded md:bg-transparent uppercase cursor-pointer">
+                            <button className="group flex items-center justify-center hover:text-primary  gap-1 py-2 px-3 text-white rounded md:bg-transparent uppercase cursor-pointer" onClick={toggleCartModal}>
+
                                 <div className="relative flex gap-1 items-center">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -128,12 +134,14 @@ export const NavBarComponent = () => {
                                             d="M18.5 4c-.2 0-.4-.1-.4-.3l-.5-1.1c-.1-.2 0-.5.2-.7.2-.1.5 0 .7.2l.5 1.1c.1.2 0 .5-.2.7-.1.1-.2.1-.3.1zM23 18.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5zm0-4c-.8 0-1.5.7-1.5 1.5s.7 1.5 1.5 1.5 1.5-.7 1.5-1.5-.7-1.5-1.5-1.5zM25 12.6c-.1 0-.3-.1-.4-.2-.5-.6-1.2-1-2-1.3-.6-.1-1.1-.1-1.1-.1-.3 0-.5-.2-.5-.5s.2-.5.5-.5c.1 0 2.3-.1 3.9 1.8.2.2.2.5-.1.7-.1 0-.2.1-.3.1zM11.5 15c-.3 0-.5-.2-.5-.5 0-1.4-1.1-2.5-2.5-2.5H6.7c-.7 0-1.3.3-1.8.7l-2.1 2.1c-.2.2-.5.2-.7 0-.2-.2-.2-.5 0-.7L4.3 12c.7-.7 1.5-1 2.5-1h1.8c1.9 0 3.5 1.6 3.5 3.5-.1.3-.3.5-.6.5zM6 18.5c-1.1 0-2.1-.8-2.4-1.9-.1-.3.1-.5.4-.6.3-.1.5.1.6.4.1.6.7 1.1 1.4 1.1s1.3-.5 1.4-1.1c.1-.3.3-.4.6-.4.3.1.4.3.4.6-.3 1.1-1.3 1.9-2.4 1.9z"
                                         />
                                     </svg>
-                                    <div
-                                        v-if="store.cart.length > 0"
-                                        className="group-hover:text-white absolute -top-[10px] -left-[10px] text-xs flex items-center justify-center w-5 h-5 bg-primary rounded-full"
-                                    >
-                                        {/* {{ store.cart.length }} */}1
-                                    </div>
+                                    {cart.length > 0 &&
+
+                                        <div
+                                            className="group-hover:text-white absolute -top-[10px] -left-[10px] text-xs flex items-center justify-center w-5 h-5 bg-primary rounded-full"
+                                        >
+                                            {totalQuantity}
+                                        </div>
+                                    }
                                     cart
                                 </div>
                             </button>

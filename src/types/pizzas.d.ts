@@ -21,6 +21,18 @@ export interface Pizza {
     priceAfterDiscount: number
 }
 
+export interface CartPizza {
+    id: number
+    name: string
+    fullImagePath: string
+    description: string
+    price: string
+    available: number
+    discountPercent: number
+    priceAfterDiscount: number,
+    quantity: number
+}
+
 export interface Links {
     first: string
     last: string

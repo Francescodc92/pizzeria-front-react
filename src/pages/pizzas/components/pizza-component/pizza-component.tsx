@@ -1,3 +1,4 @@
+import { useCartStore } from "@/store/cart"
 import type { Pizza } from "@/types/pizzas"
 import { formatCurrency } from "@/utils/format-currency/format-currency"
 import { Link } from "react-router-dom"
@@ -7,10 +8,10 @@ interface PizzaComponentProp {
 }
 
 export const PizzaComponent = ({ pizza }: PizzaComponentProp) => {
+  const addItemToCart = useCartStore(state => state.addItemToCart)
   return (
     <div className=" border border-primary/30 cursor-pointer hover:border-primary rounded-md  overflow-hidden">
-
-      <Link to="{ name: 'single-pizza', params: { id: pizza.id } }" >
+      <Link to={`/pizzas/${pizza.id}`} >
         <div className="h-[250px] relative">
           <img className="w-full h-full object-cover object-center" src={pizza.fullImagePath} alt={pizza.name} />
           {pizza.discountPercent > 0 && <span v-if="pizza.discountPercent"
@@ -33,7 +34,7 @@ export const PizzaComponent = ({ pizza }: PizzaComponentProp) => {
       </Link >
       <div className="flex items-center justify-center gap-3 py-3">
         <button
-          // @click="addPizzaToCart(pizza)"
+          onClick={() => addItemToCart(pizza)}
           className="bg-primary text-white px-5 py-2 rounded text-sm cursor-pointer">Aggiungi al carrello</button>
       </div>
 

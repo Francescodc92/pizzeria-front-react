@@ -12,7 +12,7 @@ const queryClient = new QueryClient()
 function App() {
 
   return (
-    <>
+    <div className='relative'>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Layout>
@@ -23,7 +23,7 @@ function App() {
           </Layout>
         </BrowserRouter>
       </QueryClientProvider>
-    </>
+    </div>
   )
 }
 

@@ -1,3 +1,4 @@
+import { CartModalComponent } from "@/components/cart/cart-modal-component";
 import { FooterComponent } from "@/components/footer/footer-component";
 import { GoUpButtonComponent } from "@/components/go-up-button/go-up-button";
 import { HeaderComponent } from "@/components/header/header-component";
@@ -16,6 +17,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
             <HeaderComponent />
             {children}
             <GoUpButtonComponent />
+            <CartModalComponent />
             <FooterComponent />
         </>
     )
