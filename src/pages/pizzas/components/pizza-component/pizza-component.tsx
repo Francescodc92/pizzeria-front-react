@@ -8,24 +8,24 @@ interface PizzaComponentProp {
 
 export const PizzaComponent = ({ pizza }: PizzaComponentProp) => {
   return (
-    <div className=" border border-primary/30 cursor-pointer hover:border-primary rounded-md ">
+    <div className=" border border-primary/30 cursor-pointer hover:border-primary rounded-md  overflow-hidden">
 
       <Link to="{ name: 'single-pizza', params: { id: pizza.id } }" >
         <div className="h-[250px] relative">
-          <img className="w-full h-full object-contain object-center" src={pizza.fullImagePath} alt={pizza.name} />
-          <span v-if="pizza.discountPercent"
+          <img className="w-full h-full object-cover object-center" src={pizza.fullImagePath} alt={pizza.name} />
+          {pizza.discountPercent > 0 && <span v-if="pizza.discountPercent"
             className="absolute top-4 right-3 h-12 w-12 flex items-center justify-center bg-primary text-md font-bold rounded-full text-white">
             -{pizza.discountPercent}%
-          </span>
+          </span>}
         </div>
         <div className="text-center text-lg mt-3">
           <h3 className="uppercase text-[#b68a2c]">
             {pizza.name}
           </h3>
 
-          <span className="px-2 py-1 font-bold text-gray-500 line-through" v-if="pizza.discountPercent">
+          {pizza.discountPercent > 0 && <span className="px-2 py-1 font-bold text-gray-500 line-through" v-if="pizza.discountPercent">
             {formatCurrency(pizza.price)}
-          </span>
+          </span>}
           <span className="px-2 py-1 font-bold text-primary">
             {formatCurrency(pizza.priceAfterDiscount)}
           </span>
