@@ -4,30 +4,26 @@ import {
 } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import { FooterComponent } from './components/footer/footer-component';
-import { GoUpButtonComponent } from './components/go-up-button/go-up-button';
-import { HeaderComponent } from './components/header/header-component';
 import { HomePage } from './pages/home/home-page';
+import { Layout } from './pages/layout/layout';
 import { PizzasPage } from './pages/pizzas/pizzas-page';
 
 const queryClient = new QueryClient()
 function App() {
 
   return (
-    <>
+    <div className='relative'>
       <QueryClientProvider client={queryClient}>
-
         <BrowserRouter>
-          <HeaderComponent />
-          <Routes>
-            <Route element={<HomePage />} index />
-            <Route element={<PizzasPage />} path='/pizzas' />
-          </Routes>
+          <Layout>
+            <Routes>
+              <Route element={<HomePage />} index />
+              <Route element={<PizzasPage />} path='/pizzas' />
+            </Routes>
+          </Layout>
         </BrowserRouter>
-        <GoUpButtonComponent />
-        <FooterComponent />
       </QueryClientProvider>
-    </>
+    </div>
   )
 }
 

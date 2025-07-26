@@ -1,11 +1,11 @@
 import { SwiperComponent } from "@/components/swiper-component/swiper-component";
-import { usePizzas } from "@/http/use-pizzas";
+import { useDiscountedPizzas } from "@/http/use-discounted-pizzas";
 import { SwiperSlide } from "swiper/react";
 import { PizzaComponent } from "./pizza-component";
 
 
 export const PizzasSectionComponent = () => {
-    const { data, isLoading, error } = usePizzas()
+    const { data, isLoading, error } = useDiscountedPizzas()
 
 
     return (
