@@ -44,7 +44,6 @@ export const FooterComponent = () => {
                         <ul>
                             {restaurantInfoArray.map((restaurant, index) => (
                                 <li
-                                    v-for="(restaurant, index) in restaurantsArray"
                                     key={index}
                                     className="mb-2"
                                 >

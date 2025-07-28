@@ -16,7 +16,6 @@ export const PizzaComponent = ({ pizza }: PizzaComponentProps) => {
                         alt={pizza.name}
                     />
                     <span
-                        v-if="pizzaObj.discountPercent"
                         className="absolute top-4 right-3 h-12 w-12 flex items-center justify-center bg-primary text-md font-bold rounded-full text-white"
                     >
                         -{pizza.discountPercent}%

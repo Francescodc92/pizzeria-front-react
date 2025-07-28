@@ -44,7 +44,8 @@ const NavItemsArray = [
 ];
 
 export const NavBarComponent = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isLogoutMenuOpen, setLogoutMenuOpen] = useState(false);
     const loggedUser = useUserStore(state => state.loggedUser)
     const toggleLoginModal = useToggleModalStore(state => state.toggleLoginModal)
     const toggleCartModal = useToggleCartModalStore(state => state.toggleCartModal)
@@ -75,7 +76,7 @@ export const NavBarComponent = () => {
                 </div>
 
                 <div
-                    className={`items-center justify-between md:flex md:w-auto absolute md:static md:opacity-100 bottom-0 left-0 translate-y-full md:translate-0 w-full transition  ${isOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
+                    className={`items-center justify-between md:flex md:w-auto absolute md:static md:opacity-100 bottom-0 left-0 translate-y-full md:translate-0 w-full transition  ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
                 >
                     <ul className="flex flex-col gap-5 md:gap-0 py-4 px-1 md:p-0 rounded-b-lg rtl:space-x-reverse md:flex-row md:items-center md:mt-0 md:border-0 bg-zinc-800 md:bg-transparent  text-white">
                         {NavItemsArray.slice(0, 2).map((item, index) => {
@@ -163,10 +164,12 @@ export const NavBarComponent = () => {
                     {loggedUser && (
                         <ul className={loggedUser ? "" : "hidden"}>
                             <li className="text-primary uppercase hover:text-primary/70 p-2 underline cursor-pointer relative">
-                                <span> {loggedUser?.firstName} </span>
+                                <button onClick={() => setLogoutMenuOpen(!isLogoutMenuOpen)}>
+                                    {loggedUser.firstName}
+                                </button>
+
                                 <div
-                                    className="w-[180px] bg-black/60 px-5 py-3 rounded-lg z-50 absolute top-10 lg:-left-2 -left-[100px] transition-all duration-300"
-                                    v-if="logoutModalOpen"
+                                    className={`w-[180px] bg-black/60 px-5 py-3 rounded-lg z-50 absolute top-10 lg:-left-2 -left-[100px] transition-all duration-300 ${isLogoutMenuOpen ? "opacity-100 visible" : "opacity-0 hidden"}`}
                                 >
                                     <ul className="flex flex-col gap-3">
                                         <li>
@@ -174,18 +177,22 @@ export const NavBarComponent = () => {
                                                 Logout
                                             </button>
                                         </li>
-                                        <li
-                                            v-if="store.user.role.includes('admin')"
-                                            className="w-full"
-                                        >
-                                            <a
-                                                className="bg-primary w-full block text-white px-3 py-2 text-center uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70"
-                                                href="http://localhost/admin/pizzas"
-                                                target="_blank"
-                                            >
-                                                Area Admin
-                                            </a>
-                                        </li>
+                                        {
+                                            loggedUser.role.includes('admin') && (
+
+                                                <li
+                                                    className="w-full"
+                                                >
+                                                    <a
+                                                        className="bg-primary w-full block text-white px-3 py-2 text-center uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70"
+                                                        href="http://localhost/admin/pizzas"
+                                                        target="_blank"
+                                                    >
+                                                        Area Admin
+                                                    </a>
+                                                </li>
+                                            )
+                                        }
                                     </ul>
                                 </div>
                             </li>
@@ -195,7 +202,7 @@ export const NavBarComponent = () => {
                     <button
                         type="button"
                         className="inline-flex items-center p-2 w-10 h-10 justify-center   rounded-lg md:hidden  focus:outline-none focus:ring-2  text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         <span className="sr-only">Open main menu</span>
                         <svg

@@ -1,6 +1,8 @@
 import { useCartStore } from "@/store/cart"
 import { useToggleCartModalStore } from "@/store/modal-cart"
 import { formatCurrency } from "@/utils/format-currency/format-currency"
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { CartPizzaComponent } from "./cart-pizza-component"
 
 export const CartModalComponent = () => {
@@ -8,6 +10,9 @@ export const CartModalComponent = () => {
     const isModalCartOpen = useToggleCartModalStore(state => state.isModalCartOpen)
     const toggleCartModal = useToggleCartModalStore(state => state.toggleCartModal)
     const getCartTotalPrice = useCartStore(state => state.getCartTotalPrice)
+
+    //ToDo: verificare se il contenuto del cart ha avuto variazioni del prezzo
+    // aggiungere un toast da chiamare durante i cambi di stato dell'app
 
     return (
         <div
@@ -22,13 +27,20 @@ export const CartModalComponent = () => {
 
             {
                 cart.length <= 0 ? (
-                    <h3 v-if="store.cart.length === 0" className="text-center text-2xl text-gray-500 uppercase mt-6">
-                        Il carrello è vuoto
-                    </h3>
+                    <div className="flex flex-col gap-10">
+                        <h3 className="text-center text-2xl text-gray-500 uppercase mt-6">
+                            Il carrello è vuoto
+                        </h3>
+                        <FontAwesomeIcon className="text-primary text-6xl" icon={faCartShopping} />
+                    </div>
+
                 ) : (
                     <>
                         <div className="h-[70%] overflow-y-auto">
-                            <h1 className="text-3xl font-bold text-primary text-center">Carrello</h1>
+                            <h1 className="text-3xl font-bold text-primary flex items-center justify-center gap-3">
+                                <FontAwesomeIcon className="text-primary text-3xl" icon={faCartShopping} />
+                                Carrello
+                            </h1>
                             {
                                 cart.map(cartItem => {
                                     return <CartPizzaComponent key={cartItem.id} pizza={cartItem} />

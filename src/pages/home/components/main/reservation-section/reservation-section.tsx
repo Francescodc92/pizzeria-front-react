@@ -22,7 +22,6 @@ export const ReservationsSectionComponent = () => {
                             type="number"
                             id="person-reservation"
                             placeholder="1"
-                            v-model="reservation.numberOfPerson"
                             required
                         />
                         <FontAwesomeIcon
@@ -39,7 +38,6 @@ export const ReservationsSectionComponent = () => {
                             className="outline-0 px-1 w-[150px]"
                             type="date"
                             id="date-reservation"
-                            v-model="reservation.dateReservation"
                             required
                         />
                         <FontAwesomeIcon
@@ -57,7 +55,6 @@ export const ReservationsSectionComponent = () => {
                             type="time"
                             id="hour-reservation"
                             placeholder="7:00 pm"
-                            v-model="reservation.hourReservation"
                             required
                         />
                         <FontAwesomeIcon

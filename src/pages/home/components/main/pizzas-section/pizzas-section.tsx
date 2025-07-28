@@ -1,5 +1,6 @@
 import { SwiperComponent } from "@/components/swiper-component/swiper-component";
 import { useDiscountedPizzas } from "@/http/use-discounted-pizzas";
+import { Link } from "react-router-dom";
 import { SwiperSlide } from "swiper/react";
 import { PizzaComponent } from "./pizza-component";
 
@@ -9,7 +10,7 @@ export const PizzasSectionComponent = () => {
 
 
     return (
-        <section id="menu" className="my-2">
+        <section id="menu" className="my-2 px-4">
             <div className="max-w-xl mx-auto text-center py-5">
                 <p className="text-primary uppercase text-md">Choose your favorite</p>
                 <h2 className="uppercase text-xl my-2 font-semibold">
@@ -55,9 +56,9 @@ export const PizzasSectionComponent = () => {
             </div>
 
             <div className="text-center my-7">
-                <a className="bg-primary text-white rounded px-4 py-3 uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70">
-                    Pagina Prodotti
-                </a>
+                <Link to="/pizzas" className="bg-primary text-white rounded px-4 py-3 uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70">
+                    Visualizza tutti i Prodotti
+                </Link>
             </div>
         </section>
     );

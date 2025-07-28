@@ -48,14 +48,16 @@ export const MainPizzaComponent = () => {
                         </div>
 
                         <div
-                            className="flex items-center justify-between lg:justify-center gap-3 py-3 lg:py-5 sticky bottom-0 bg-white lg:static"
-                            v-if="lastPage != 1">
+                            className="flex items-center justify-between lg:justify-center gap-3 py-3 lg:py-5 sticky bottom-0 bg-white lg:static">
                             <button
                                 className="bg-primary text-white px-5 py-2 rounded text-sm cursor-pointer disabled:opacity-50 disabled:cursor-auto uppercase"
                                 onClick={() => handleChangePage("prev")} disabled={page == 1}
                             >
                                 prev
                             </button>
+                            <div className="text-xl">
+                                <span className="text-primary">{page}</span>/<span>{data?.meta.last_page}</span>
+                            </div>
                             <button
                                 className="bg-primary text-white px-5 py-2 rounded text-sm cursor-pointer disabled:opacity-50 disabled:cursor-auto uppercase"
                                 onClick={() => handleChangePage("next")} disabled={page == Number(data?.meta.last_page)}
