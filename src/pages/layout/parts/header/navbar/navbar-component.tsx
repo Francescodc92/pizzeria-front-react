@@ -70,7 +70,7 @@ export const NavBarComponent = () => {
                 <div className="max-w-[80px] sm:max-w-[90px] block md:hidden">
                     <img
                         className="w-full"
-                        src="./src/assets/img/h5-logo-divided-header-dark.png"
+                        src="/src/assets/img/h5-logo-divided-header-dark.png"
                         alt="logo pizzeria don peppe"
                     />
                 </div>
@@ -94,7 +94,7 @@ export const NavBarComponent = () => {
                             <div className="max-w-[100px] hidden md:block">
                                 <img
                                     className="w-full"
-                                    src="./src/assets/img/h5-logo-divided-header.png"
+                                    src="/src/assets/img/h5-logo-divided-header.png"
                                     alt="logo pizzeria don peppe"
                                 />
                             </div>

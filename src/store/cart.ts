@@ -1,15 +1,18 @@
 import type { CartPizza, Pizza } from "@/types/pizzas";
+import { toast } from "sonner";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 
 interface UseCartStore {
     cart: CartPizza[],
+    isPizzaInCart: (pizzaId: number) => CartPizza | undefined
     addItemToCart: (pizza: Pizza) => void,
     removeItemToCart: (pizza: CartPizza) => void,
     incrementPizzaQuantity: (pizzaId: number) => void,
     decrementPizzaQuantity: (pizzaId: number) => void,
     getPizzaTotalPrice: (pizzaId: number) => number,
+    getPizzaQuantity: (pizzaId: number) => number,
     getCartTotalPrice: () => number
 }
 
@@ -17,11 +20,15 @@ export const useCartStore = create<UseCartStore>()(
     persist(
         (set, get) => ({
             cart: [],
+            isPizzaInCart: (pizzaId: number) => {
+                const currentCart = get().cart;
+                return currentCart.find(cartItem => cartItem.id == pizzaId)
+            },
             addItemToCart: (pizza: Pizza) => {
                 const currentCart = get().cart;
-                const existingPizza = currentCart.findIndex(cartItem => cartItem.id == pizza.id)
+                const existingPizza = get().isPizzaInCart(pizza.id)
 
-                if (existingPizza != -1) {
+                if (existingPizza) {
                     const updatedCart = currentCart.map(cartItem => (
                         cartItem.id == pizza.id ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
                     ))
@@ -30,11 +37,14 @@ export const useCartStore = create<UseCartStore>()(
                 } else {
                     set({ cart: [...currentCart, { ...pizza, quantity: 1 }] })
                 }
+                toast.success("Pizza aggiunta al carrello")
+
             },
             removeItemToCart: (pizza: CartPizza) => {
                 const currentCart = get().cart;
                 const updatedCart = currentCart.filter(cartItem => cartItem.id != pizza.id)
                 set({ cart: updatedCart })
+                toast.success("Pizza rimossa dal carrello")
             },
             incrementPizzaQuantity: (pizzaId: number) => {
                 const currentCart = get().cart;
@@ -54,9 +64,14 @@ export const useCartStore = create<UseCartStore>()(
 
             },
             getPizzaTotalPrice: (pizzaId: number) => {
-                const currentCart = get().cart;
-                const pizza = currentCart.find(cartItem => cartItem.id == pizzaId)
-                return pizza ? pizza?.quantity * pizza?.priceAfterDiscount : 0
+                const existingPizza = get().isPizzaInCart(pizzaId)
+                return existingPizza ? existingPizza?.quantity * existingPizza?.priceAfterDiscount : 0
+            },
+            getPizzaQuantity: (pizzaId: number) => {
+                const existingPizza = get().isPizzaInCart(pizzaId)
+                if (!existingPizza) return 0
+
+                return existingPizza.quantity
             },
             getCartTotalPrice: () => {
                 const currentCart = get().cart;

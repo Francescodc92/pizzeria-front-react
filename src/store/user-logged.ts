@@ -1,4 +1,5 @@
 import type { User } from "@/types/auth-user";
+import { toast } from "sonner";
 import { create } from "zustand";
 import { persist } from 'zustand/middleware';
 
@@ -11,8 +12,14 @@ interface UseUserStore {
 export const useUserStore = create(persist<UseUserStore>(
     (set) => ({
         loggedUser: null,
-        loginUser: (user) => set(() => ({ loggedUser: user })),
-        logoutUser: () => set(() => ({ loggedUser: null }))
+        loginUser: (user) => {
+            toast.success("Login effettuato con successo!")
+            return set(() => ({ loggedUser: user }))
+        },
+        logoutUser: () => {
+            toast.success("Logout effettuato con successo!")
+            return set(() => ({ loggedUser: null }))
+        }
     }),
     {
         name: "user-storage",
