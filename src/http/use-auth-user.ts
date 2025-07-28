@@ -4,7 +4,7 @@ import { getCookie } from "@/utils/cookie/get-cookie";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import type { LoginUserRequest, LoginUserResponse, LogoutUserResponse } from "../types/auth-user";
+import type { LoginUserRequest, LoginUserResponse, LogoutUserResponse, RegisterUserRequest, RegisterUserResponse } from "../types/auth-user";
 
 export function useLoginUser() {
     const xsrfToken = getCookie('XSRF-TOKEN');
@@ -15,6 +15,7 @@ export function useLoginUser() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Accept": "application/json",
                     "X-XSRF-TOKEN": xsrfToken || ""
                 },
                 credentials: "include",
@@ -28,8 +29,55 @@ export function useLoginUser() {
                 throw new Error(result.error)
             }
 
+            toast.success("Login effettuato con successo!")
 
             loginUser(result.loggedUser!)
+
+            return result.message;
+        },
+    });
+
+}
+
+export function useRegisterUser() {
+    const xsrfToken = getCookie('XSRF-TOKEN');
+    return useMutation({
+        mutationFn: async ({ firstName,
+            lastName,
+            phoneNumber,
+            email,
+            password,
+            passwordConfirmation }: RegisterUserRequest) => {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-XSRF-TOKEN": xsrfToken || ""
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    phone_number: phoneNumber,
+                    email,
+                    password,
+                    password_confirmation: passwordConfirmation
+                }),
+            });
+
+            const result: RegisterUserResponse = await response.json()
+
+            if (result.errors) {
+                Object.values(result.errors).forEach((errorArray) => {
+                    errorArray.forEach((errorMessage: string) => {
+                        toast.error(errorMessage);
+                    });
+                });
+                throw new Error("Validation errors");
+            }
+
+            toast.success("Registrazione effettuata con successo!")
 
             return result.message;
         },
@@ -58,6 +106,9 @@ export function useLogoutUser() {
                 toast.error(result.error)
                 throw new Error(result.error)
             }
+
+            toast.success("Logout effettuato con successo!")
+
 
             logoutUser()
         }
