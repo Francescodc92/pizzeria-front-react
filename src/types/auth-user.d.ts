@@ -9,6 +9,20 @@ export type LoginUserResponse = {
     error?: string
 }
 
+export type RegisterUserRequest = {
+    firstName: string,
+    lastName: string,
+    phoneNumber: string,
+    email: string,
+    password: string,
+    passwordConfirmation: string
+}
+
+export type RegisterUserResponse = {
+    message?: string,
+    errors?: Record<string, string[]>
+}
+
 export type LogoutUserResponse = {
     message?: string,
     error?: string

@@ -24,7 +24,6 @@ export const PizzasSectionComponent = () => {
 
             {
                 error && (
-                    //TODO: cambiare con un toast
                     <p className="text-center text-red-500">{error.message}</p>
                 )
             }

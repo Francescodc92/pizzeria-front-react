@@ -1,7 +1,8 @@
+import { RegisterModalComponent } from "@/components/auth-components/register-modal-component";
 import { useToggleModalStore } from "@/store/modal-login";
 import { useToggleRegisterModalStore } from "@/store/modal-register";
 import { useLocation } from "react-router-dom";
-import { LoginModalComponent } from "./auth/login-modal-component";
+import { LoginModalComponent } from "../../../../components/auth-components/login-modal-component";
 import { NavBarComponent } from "./navbar/navbar-component";
 import { SliderComponent } from "./slider/slider-component";
 
@@ -22,7 +23,7 @@ export const HeaderComponent = () => {
         )
       }
       {isModalLoginOpen && <LoginModalComponent />}
-      {isModalRegisterOpen && <p className="bg-red-500 text-5xl">is Open</p>}
+      {isModalRegisterOpen && <RegisterModalComponent />}
 
       {/* <!--login modal-->
       <RegisterFormComponent

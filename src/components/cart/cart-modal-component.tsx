@@ -12,7 +12,6 @@ export const CartModalComponent = () => {
     const getCartTotalPrice = useCartStore(state => state.getCartTotalPrice)
 
     //ToDo: verificare se il contenuto del cart ha avuto variazioni del prezzo
-    // aggiungere un toast da chiamare durante i cambi di stato dell'app
 
     return (
         <div
