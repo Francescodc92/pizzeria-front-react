@@ -2,6 +2,8 @@
 import { useUserStore } from "@/store/user-logged";
 import { getCookie } from "@/utils/cookie/get-cookie";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+
 import type { LoginUserRequest, LoginUserResponse, LogoutUserResponse } from "../types/auth-user";
 
 export function useLoginUser() {
@@ -21,7 +23,10 @@ export function useLoginUser() {
 
             const result: LoginUserResponse = await response.json()
 
-            if (result.error) throw new Error(result.error)
+            if (result.error) {
+                toast.error(result.error)
+                throw new Error(result.error)
+            }
 
 
             loginUser(result.loggedUser!)
@@ -49,7 +54,10 @@ export function useLogoutUser() {
 
             const result: LogoutUserResponse = await response.json()
 
-            if (result.error) throw new Error(result.error)
+            if (result.error) {
+                toast.error(result.error)
+                throw new Error(result.error)
+            }
 
             logoutUser()
         }

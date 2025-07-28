@@ -2,6 +2,9 @@ export type PizzaResponse = {
     data: Pizza[]
 }
 
+export type SinglePizzaResponse = {
+    data: Pizza
+}
 
 export type PaginatedPizzasResponse = {
     data: Pizza[]

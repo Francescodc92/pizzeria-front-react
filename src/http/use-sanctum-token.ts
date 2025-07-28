@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export function useSanctumToken() {
     return useQuery({
@@ -12,6 +13,7 @@ export function useSanctumToken() {
             });
 
             if (!res.ok) {
+                toast.error('Errore nel recupero del CSRF token')
                 throw new Error('Errore nel recupero del CSRF token');
             }
 
