@@ -25,7 +25,7 @@ export const SinglePizzaPage = () => {
             }
             {
                 pizza && (
-                    <div className="max-w-6xl mx-auto md:flex my-10 min-h-[350px] px-3 relative pt-10 ">
+                    <div className="max-w-6xl mx-auto md:flex my-10 min-h-[350px] px-3 relative pt-10 mt-32">
                         <button
                             onClick={() => navigate("/pizzas")}
                             className="absolute -top-2 left-2 bg-primary text-white w-10 h-10 flex items-center justify-center rounded-md">

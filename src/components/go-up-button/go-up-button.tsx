@@ -21,7 +21,7 @@ export const GoUpButtonComponent = () => {
                 w-12 h-12 fixed bottom-[80px] right-4 lg:bottom-10 md:right-10 z-[100] 
                 bg-slate-200 rounded-full border border-primary transition-opacity duration-300`}
         >       <button onClick={handleButtonClick} className="w-full h-full flex items-center justify-center rounded-full cursor-pointer">
-                <img src="./src/assets/svg/svg-4.svg" alt="" />
+                <img src="/src/assets/svg/svg-4.svg" alt="" />
             </button>
         </div >
     );

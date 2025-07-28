@@ -29,7 +29,7 @@ export const MainPizzaComponent = () => {
 
             {
                 data && (
-                    <div className="max-w-6xl mx-auto px-3 relative">
+                    <div className="max-w-6xl mx-auto px-3 relative mt-32">
                         <button
                             onClick={() => navigate("/")}
                             className="absolute top-0 left-0 bg-primary text-white w-10 h-10 flex items-center justify-center rounded-md">
