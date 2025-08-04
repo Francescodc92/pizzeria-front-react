@@ -50,3 +50,20 @@ export interface UserAddress {
     country: string
     zipCode: string
 }
+
+export interface UserAddressRequest {
+    road: string
+    city: string
+    country: string
+    zipCode: string
+}
+
+export interface UserAddressResponse {
+    message?: string
+    error?: string
+}
+
+export interface deleteUserAddressResponse {
+    message?: string
+    error?: string
+}
