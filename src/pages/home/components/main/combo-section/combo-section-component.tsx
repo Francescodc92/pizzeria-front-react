@@ -21,7 +21,7 @@ const combosArray = [
     },
 ];
 
-export const ComboSectionComponents = () => {
+export const ComboSectionComponent = () => {
     return (
         <section
             id="specialsCombos"

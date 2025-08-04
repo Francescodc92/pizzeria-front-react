@@ -3,8 +3,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { useRegisterUser } from '@/http/use-auth-user';
 import { useSanctumToken } from '@/http/use-sanctum-token';
-import { useToggleModalStore } from "@/store/modal-login";
-import { useToggleRegisterModalStore } from "@/store/modal-register";
+import { useToggleLoginModalStore } from '@/store/login-modal';
+import { useToggleRegisterModalStore } from "@/store/register-modal";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod/v4';
@@ -28,7 +28,7 @@ const registerUserSchema = z.object({
 type RegisterUserFormData = z.infer<typeof registerUserSchema>
 
 export const RegisterModalComponent = () => {
-    const toggleLoginModal = useToggleModalStore(state => state.toggleLoginModal)
+    const toggleLoginModal = useToggleLoginModalStore(state => state.toggleLoginModal)
     const toggleRegisterModal = useToggleRegisterModalStore(state => state.toggleRegisterModal)
     const { mutateAsync: register } = useRegisterUser()
     const { isSuccess } = useSanctumToken()

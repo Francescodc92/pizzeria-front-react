@@ -1,11 +1,11 @@
 import { create } from 'zustand'
 
-interface UseToggleModalStore {
+interface UseToggleRegisterModalStore {
   isModalRegisterOpen: boolean
   toggleRegisterModal: () => void
 }
 
-export const useToggleRegisterModalStore = create<UseToggleModalStore>((set) => ({
+export const useToggleRegisterModalStore = create<UseToggleRegisterModalStore>((set) => ({
   isModalRegisterOpen: false,
   toggleRegisterModal: () => set((state) => ({ isModalRegisterOpen: !state.isModalRegisterOpen })),
 }))

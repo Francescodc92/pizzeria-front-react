@@ -1,5 +1,5 @@
 import { useCartStore } from "@/store/cart"
-import { useToggleCartModalStore } from "@/store/modal-cart"
+import { useToggleCartModalStore } from "@/store/cart-modal"
 import type { CartPizza } from "@/types/pizzas"
 import { formatCurrency } from "@/utils/format-currency/format-currency"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"

@@ -1,7 +1,7 @@
 import { useLogoutUser } from "@/http/use-auth-user";
 import { useCartStore } from "@/store/cart";
-import { useToggleCartModalStore } from "@/store/modal-cart";
-import { useToggleModalStore } from "@/store/modal-login";
+import { useToggleCartModalStore } from "@/store/cart-modal";
+import { useToggleLoginModalStore } from "@/store/login-modal";
 import { useUserStore } from "@/store/user-logged";
 import { useState } from "react";
 import { NavItemsComponent } from "./nav-item-component";
@@ -47,7 +47,7 @@ export const NavBarComponent = () => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isLogoutMenuOpen, setLogoutMenuOpen] = useState(false);
     const loggedUser = useUserStore(state => state.loggedUser)
-    const toggleLoginModal = useToggleModalStore(state => state.toggleLoginModal)
+    const toggleLoginModal = useToggleLoginModalStore(state => state.toggleLoginModal)
     const toggleCartModal = useToggleCartModalStore(state => state.toggleCartModal)
     const { mutateAsync: logoutUser } = useLogoutUser()
     const cart = useCartStore(state => state.cart);

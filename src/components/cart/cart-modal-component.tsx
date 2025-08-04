@@ -1,8 +1,9 @@
 import { useCartStore } from "@/store/cart"
-import { useToggleCartModalStore } from "@/store/modal-cart"
+import { useToggleCartModalStore } from "@/store/cart-modal"
 import { formatCurrency } from "@/utils/format-currency/format-currency"
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Link } from "react-router-dom"
 import { CartPizzaComponent } from "./cart-pizza-component"
 
 export const CartModalComponent = () => {
@@ -35,7 +36,7 @@ export const CartModalComponent = () => {
 
                 ) : (
                     <>
-                        <div className="h-[70%] overflow-y-auto">
+                        <div className="h-[60%] overflow-y-auto">
                             <h1 className="text-3xl font-bold text-primary flex items-center justify-center gap-3">
                                 <FontAwesomeIcon className="text-primary text-3xl" icon={faCartShopping} />
                                 Carrello
@@ -47,7 +48,7 @@ export const CartModalComponent = () => {
                             }
                         </div>
 
-                        <div className="h-[30%] flex flex-col border-t-2 border-primary rounded-t-2xl px-2 bg-white">
+                        <div className="h-[40%] flex flex-col border-t-2 border-primary rounded-t-2xl px-2 bg-white">
                             <div className="p-3 py-5 border-b-[1px] border-primary flex justify-between text-xl font-semibold">
                                 <span>Totale:</span>
                                 <p>{formatCurrency(getCartTotalPrice())}</p>
@@ -57,11 +58,12 @@ export const CartModalComponent = () => {
                                 <p>{cart.length}</p>
                             </div>
                             <div className="p-3 flex items-center justify-center flex-1">
-                                {/* <router-link :to="{ name: 'checkout' }" @click="closeModal()"
-                className="bg-primary hover:bg-primary/80 text-white px-5 py-2 rounded text-sm cursor-pointer order-2 sm:order-1">
-                Procedi
-                con l'acquisto
-            </router-link> */}
+                                <Link
+                                    to="/checkout"
+                                    onClick={toggleCartModal}
+                                    className="bg-primary hover:bg-primary/80 text-white px-5 py-2 rounded text-sm cursor-pointer order-2 sm:order-1 ">
+                                    Procedi con l'acquisto
+                                </Link>
                             </div>
                         </div>
                     </>

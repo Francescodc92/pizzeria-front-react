@@ -24,6 +24,7 @@ export const useCartStore = create<UseCartStore>()(
                 const currentCart = get().cart;
                 return currentCart.find(cartItem => cartItem.id == pizzaId)
             },
+
             addItemToCart: (pizza: Pizza) => {
                 const currentCart = get().cart;
                 const existingPizza = get().isPizzaInCart(pizza.id)
@@ -40,12 +41,14 @@ export const useCartStore = create<UseCartStore>()(
                 toast.success("Pizza aggiunta al carrello")
 
             },
+
             removeItemToCart: (pizza: CartPizza) => {
                 const currentCart = get().cart;
                 const updatedCart = currentCart.filter(cartItem => cartItem.id != pizza.id)
                 set({ cart: updatedCart })
                 toast.success("Pizza rimossa dal carrello")
             },
+
             incrementPizzaQuantity: (pizzaId: number) => {
                 const currentCart = get().cart;
                 const updatedCart = currentCart.map(cartItem => (
@@ -54,6 +57,7 @@ export const useCartStore = create<UseCartStore>()(
 
                 set({ cart: updatedCart })
             },
+
             decrementPizzaQuantity: (pizzaId: number) => {
                 const currentCart = get().cart;
                 const updatedCart = currentCart.map(cartItem => (
@@ -63,16 +67,19 @@ export const useCartStore = create<UseCartStore>()(
                 set({ cart: updatedCart })
 
             },
+
             getPizzaTotalPrice: (pizzaId: number) => {
                 const existingPizza = get().isPizzaInCart(pizzaId)
                 return existingPizza ? existingPizza?.quantity * existingPizza?.priceAfterDiscount : 0
             },
+
             getPizzaQuantity: (pizzaId: number) => {
                 const existingPizza = get().isPizzaInCart(pizzaId)
                 if (!existingPizza) return 0
 
                 return existingPizza.quantity
             },
+
             getCartTotalPrice: () => {
                 const currentCart = get().cart;
                 return currentCart.reduce((acc, item) => item.quantity * item.priceAfterDiscount + acc, 0)
