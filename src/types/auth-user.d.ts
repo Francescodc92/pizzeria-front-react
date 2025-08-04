@@ -28,6 +28,10 @@ export type LogoutUserResponse = {
     error?: string
 }
 
+export type GetUserDataResponse = {
+    loggedUser: User
+}
+
 export interface User {
     id: number
     firstName: string

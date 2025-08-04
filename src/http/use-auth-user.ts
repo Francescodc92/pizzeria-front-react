@@ -1,10 +1,10 @@
 // http/use-auth-user.ts
 import { useUserStore } from "@/store/user-logged";
 import { getCookie } from "@/utils/cookie/get-cookie";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import type { LoginUserRequest, LoginUserResponse, LogoutUserResponse, RegisterUserRequest, RegisterUserResponse } from "../types/auth-user";
+import type { GetUserDataResponse, LoginUserRequest, LoginUserResponse, LogoutUserResponse, RegisterUserRequest, RegisterUserResponse } from "../types/auth-user";
 
 export function useLoginUser() {
     const xsrfToken = getCookie('XSRF-TOKEN');
@@ -112,5 +112,41 @@ export function useLogoutUser() {
 
             logoutUser()
         }
+    })
+}
+
+export function useGetUserInfo() {
+    const xsrfToken = getCookie('XSRF-TOKEN');
+    const loginUser = useUserStore(state => state.loginUser)
+
+    return useQuery({
+        queryKey: ['get-user-data'],
+        queryFn: async () => {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-XSRF-TOKEN": xsrfToken || ""
+                },
+                credentials: "include",
+            })
+
+            if (!response.ok) {
+                toast.error("Errore durante recupero dei dati dell'utente!")
+                throw new Error("Errore durante recupero dei dati dell'utente!")
+            }
+
+            const result: GetUserDataResponse = await response.json()
+
+
+            if (!result.loggedUser) {
+                toast.error("Errore durante recupero dei dati dell'utente!")
+                throw new Error("Errore durante recupero dei dati dell'utente!")
+            }
+
+            loginUser(result.loggedUser)
+
+
+            return result.loggedUser
+        },
     })
 }

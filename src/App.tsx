@@ -4,6 +4,7 @@ import {
 } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
+import { CheckoutPage } from './pages/checkout/checkout-page';
 import { HomePage } from './pages/home/home-page';
 import { Layout } from './pages/layout/layout';
 import { PizzasPage } from './pages/pizzas/pizzas-page';
@@ -23,6 +24,7 @@ function App() {
               <Route element={<HomePage />} index />
               <Route element={<PizzasPage />} path='/pizzas' />
               <Route element={<SinglePizzaPage />} path='/pizzas/:pizzaId' />
+              <Route element={<CheckoutPage />} path='/checkout' />
             </Routes>
           </Layout>
         </BrowserRouter>
