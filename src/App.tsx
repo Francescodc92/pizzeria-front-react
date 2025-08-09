@@ -5,6 +5,8 @@ import {
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import { CheckoutPage } from './pages/checkout/checkout-page';
+import { PaymentCancelledPage } from './pages/checkout/payment-cancel';
+import { PaymentSucceededPage } from './pages/checkout/payment-success';
 import { HomePage } from './pages/home/home-page';
 import { Layout } from './pages/layout/layout';
 import { PizzasPage } from './pages/pizzas/pizzas-page';
@@ -12,7 +14,6 @@ import { SinglePizzaPage } from './pages/single-pizza/single-pizza-page';
 
 const queryClient = new QueryClient()
 function App() {
-
 
 
   return (
@@ -25,6 +26,8 @@ function App() {
               <Route element={<PizzasPage />} path='/pizzas' />
               <Route element={<SinglePizzaPage />} path='/pizzas/:pizzaId' />
               <Route element={<CheckoutPage />} path='/checkout' />
+              <Route element={<PaymentSucceededPage />} path='/checkout/success/:sessionId' />
+              <Route element={<PaymentCancelledPage />} path='/checkout/cancel' />
             </Routes>
           </Layout>
         </BrowserRouter>

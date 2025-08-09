@@ -7,6 +7,7 @@ export const CheckoutPage = () => {
     const getPizzaTotalPrice = useCartStore(state => state.getPizzaTotalPrice)
     const getCartTotalPrice = useCartStore(state => state.getCartTotalPrice)
 
+
     return (
         <main className="mt-32">
             <div className="max-w-6xl px-2 mx-auto">
