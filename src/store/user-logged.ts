@@ -5,7 +5,7 @@ import { persist } from 'zustand/middleware';
 interface UseUserStore {
     loggedUser: User | null
     selectedDeliveryAddress: UserAddress | null;
-    loginUser: (user: User | null) => void
+    loginUser: (user: User) => void
     logoutUser: () => void;
     selectDeliveryAddress: (address: UserAddress | null) => void;
 }
@@ -19,7 +19,7 @@ export const useUserStore = create(persist<UseUserStore>(
         },
 
         logoutUser: () => {
-            return set(() => ({ loggedUser: null }))
+            return set(() => ({ loggedUser: null, selectedDeliveryAddress: null }))
         },
 
         selectDeliveryAddress: (address: UserAddress | null) => {

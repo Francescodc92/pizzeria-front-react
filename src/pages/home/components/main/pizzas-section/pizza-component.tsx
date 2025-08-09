@@ -1,5 +1,6 @@
 import type { Pizza } from "@/types/pizzas";
 import { formatCurrency } from "@/utils/format-currency/format-currency";
+import { Link } from "react-router-dom";
 
 interface PizzaComponentProps {
     pizza: Pizza;
@@ -8,7 +9,7 @@ interface PizzaComponentProps {
 export const PizzaComponent = ({ pizza }: PizzaComponentProps) => {
     return (
         <div className="py-10">
-            <a className="pizza border border-primary/50  overflow-hidden block cursor-pointer hover:border-primary rounded-md">
+            <Link to={`/pizzas/${pizza.id}`} className="pizza border border-primary/50  overflow-hidden block cursor-pointer hover:border-primary rounded-md">
                 <div className="w-full h-[350px] relative">
                     <img
                         className="w-full h-full object-cover object-center"
@@ -34,7 +35,7 @@ export const PizzaComponent = ({ pizza }: PizzaComponentProps) => {
                         {formatCurrency(pizza.priceAfterDiscount)}
                     </span>
                 </div>
-            </a>
+            </Link>
         </div>
     );
 };

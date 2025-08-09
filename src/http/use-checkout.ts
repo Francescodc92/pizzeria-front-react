@@ -12,6 +12,7 @@ export function useCreateCheckoutSession() {
     const selectedDeliveryAddress = useUserStore(state => state.selectedDeliveryAddress);
 
     return useMutation({
+        mutationKey: ['create-checkout-session'],
         mutationFn: async () => {
             const pizzas = getCheckoutPizzas()
 

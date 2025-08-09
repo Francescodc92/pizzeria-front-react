@@ -97,6 +97,7 @@ export function useLogoutUser() {
 }
 
 export function useGetUserInfo() {
+    const logoutUser = useUserStore(state => state.logoutUser)
     const loginUser = useUserStore(state => state.loginUser)
     return useQuery({
         queryKey: ['get-user-data'],
@@ -106,7 +107,7 @@ export function useGetUserInfo() {
             });
 
             if (response.status === 401) {
-                loginUser(null)
+                logoutUser()
                 throw new Error("Sessione scaduta")
             }
 

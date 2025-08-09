@@ -185,7 +185,7 @@ export const NavBarComponent = () => {
                                                 >
                                                     <a
                                                         className="bg-primary w-full block text-white px-3 py-2 text-center uppercase cursor-pointer transition-all duration-300 hover:bg-primary/70"
-                                                        href="http://localhost/admin/pizzas"
+                                                        href="http://localhost:8000/admin/pizzas"
                                                         target="_blank"
                                                     >
                                                         Area Admin
