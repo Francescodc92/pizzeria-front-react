@@ -4,17 +4,20 @@ import { Toaster } from "@/components/ui/sonner";
 import { useGetUserInfo } from "@/http/use-auth-user";
 import { FooterComponent } from "@/pages/layout/parts/footer/footer-component";
 import { HeaderComponent } from "@/pages/layout/parts/header/header-component";
+import { useToggleOrderModalStore } from "@/store/order-modal";
 import { useEffect, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 
 export const Layout = ({ children }: { children: ReactNode }) => {
     const { pathname } = useLocation();
+    const resetSelectedOrder = useToggleOrderModalStore((state) => state.resetSelectedOrder);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data } = useGetUserInfo();
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" })
-    }, [pathname]);
+        resetSelectedOrder();
+    }, [pathname, resetSelectedOrder]);
 
     return (
         <>
