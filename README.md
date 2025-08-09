@@ -55,6 +55,3 @@ VITE_API_URL="url backend"
 VITE_STRIPE_PUBLIC_KEY=
 ```
 
----
-
-> Per domande o problemi, apri una issue o contatta il
