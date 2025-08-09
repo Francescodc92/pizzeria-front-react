@@ -76,7 +76,7 @@ export const NavBarComponent = () => {
                 </div>
 
                 <div
-                    className={`items-center justify-between md:flex md:w-auto absolute md:static md:opacity-100 bottom-0 left-0 translate-y-full md:translate-0 w-full transition  ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}
+                    className={`items-center justify-between md:flex md:w-auto absolute md:static md:opacity-100 bottom-0 left-0 translate-y-full md:translate-0 w-full md:pointer-events-auto transition ${isMobileMenuOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-full opacity-0 pointer-events-none"}`}
                 >
                     <ul className="flex flex-col gap-5 md:gap-0 py-4 px-1 md:p-0 rounded-b-lg rtl:space-x-reverse md:flex-row md:items-center md:mt-0 md:border-0 bg-zinc-800 md:bg-transparent  text-white">
                         {NavItemsArray.slice(0, 2).map((item, index) => {

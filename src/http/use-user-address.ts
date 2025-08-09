@@ -1,5 +1,6 @@
 import { useUserStore } from "@/store/user-logged";
 import type { deleteUserAddressResponse, UserAddressRequest, UserAddressResponse } from "@/types/auth-user";
+import { baseFetch } from "@/utils/base-fetch/base-fetch";
 import { getCookie } from "@/utils/cookie/get-cookie";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -56,7 +57,6 @@ export function useCreateUserAddress() {
 
 
 export function useDeleteUserAddress() {
-    const xsrfToken = getCookie('XSRF-TOKEN');
     const queryClient = useQueryClient();
     const loginUser = useUserStore(state => state.loginUser);
     const selectDeliveryAddress = useUserStore(state => state.selectDeliveryAddress);
@@ -64,14 +64,8 @@ export function useDeleteUserAddress() {
 
     return useMutation({
         mutationFn: async (addressId: number) => {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/address/${addressId}`, {
+            const response = await baseFetch(`${import.meta.env.VITE_API_URL}/api/user/address/${addressId}`, {
                 method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "X-XSRF-TOKEN": xsrfToken || ""
-                },
-                credentials: "include",
             });
 
             const result: deleteUserAddressResponse = await response.json();

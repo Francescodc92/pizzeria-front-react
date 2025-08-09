@@ -22,8 +22,8 @@ export const AddressComponent = ({ address }: AddressComponentProps) => {
                 id={`radio-${address.id}`}
                 name="address"
                 className="w-4 h-4 text-primary bg-primary border-primary/85"
-                checked={selectedAddress === address.id}
-                onChange={() => selectDeliveryAddress(address.id)}
+                checked={selectedAddress?.id === address.id}
+                onChange={() => selectDeliveryAddress(address)}
             />
             <label className="w-full py-4 ms-2 text-sm font-medium text-gray-900 cursor-pointer" htmlFor={`radio-${address.id}`}>
                 {address.road}, {address.city}, {address.country}

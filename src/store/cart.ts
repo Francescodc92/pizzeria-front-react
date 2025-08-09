@@ -4,16 +4,23 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 
+interface CheckoutPizza {
+    pizza: number,
+    quantity: number,
+}
+
 interface UseCartStore {
     cart: CartPizza[],
     isPizzaInCart: (pizzaId: number) => CartPizza | undefined
     addItemToCart: (pizza: Pizza) => void,
     removeItemToCart: (pizza: CartPizza) => void,
+    clearCart: () => void,
     incrementPizzaQuantity: (pizzaId: number) => void,
     decrementPizzaQuantity: (pizzaId: number) => void,
     getPizzaTotalPrice: (pizzaId: number) => number,
     getPizzaQuantity: (pizzaId: number) => number,
-    getCartTotalPrice: () => number
+    getCartTotalPrice: () => number,
+    getCheckoutPizzas: () => CheckoutPizza[]
 }
 
 export const useCartStore = create<UseCartStore>()(
@@ -47,6 +54,10 @@ export const useCartStore = create<UseCartStore>()(
                 const updatedCart = currentCart.filter(cartItem => cartItem.id != pizza.id)
                 set({ cart: updatedCart })
                 toast.success("Pizza rimossa dal carrello")
+            },
+
+            clearCart: () => {
+                set({ cart: [] })
             },
 
             incrementPizzaQuantity: (pizzaId: number) => {
@@ -83,6 +94,11 @@ export const useCartStore = create<UseCartStore>()(
             getCartTotalPrice: () => {
                 const currentCart = get().cart;
                 return currentCart.reduce((acc, item) => item.quantity * item.priceAfterDiscount + acc, 0)
+            },
+
+            getCheckoutPizzas: () => {
+                const currentCart = get().cart;
+                return currentCart.map(item => ({ pizza: item.id, quantity: item.quantity }));
             }
         }),
         {

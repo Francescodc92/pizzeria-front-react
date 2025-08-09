@@ -1,24 +1,17 @@
 // http/use-auth-user.ts
 import { useUserStore } from "@/store/user-logged";
-import { getCookie } from "@/utils/cookie/get-cookie";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 
+import { baseFetch } from "@/utils/base-fetch/base-fetch";
 import type { GetUserDataResponse, LoginUserRequest, LoginUserResponse, LogoutUserResponse, RegisterUserRequest, RegisterUserResponse } from "../types/auth-user";
 
 export function useLoginUser() {
-    const xsrfToken = getCookie('XSRF-TOKEN');
     const loginUser = useUserStore(state => state.loginUser)
     return useMutation({
         mutationFn: async ({ email, password }: LoginUserRequest) => {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
+            const response = await baseFetch(`${import.meta.env.VITE_API_URL}/api/login`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "X-XSRF-TOKEN": xsrfToken || ""
-                },
-                credentials: "include",
                 body: JSON.stringify({ email, password }),
             });
 
@@ -40,7 +33,6 @@ export function useLoginUser() {
 }
 
 export function useRegisterUser() {
-    const xsrfToken = getCookie('XSRF-TOKEN');
     return useMutation({
         mutationFn: async ({ firstName,
             lastName,
@@ -48,14 +40,8 @@ export function useRegisterUser() {
             email,
             password,
             passwordConfirmation }: RegisterUserRequest) => {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+            const response = await baseFetch(`${import.meta.env.VITE_API_URL}/api/register`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "X-XSRF-TOKEN": xsrfToken || ""
-                },
-                credentials: "include",
                 body: JSON.stringify({
                     first_name: firstName,
                     last_name: lastName,
@@ -86,17 +72,12 @@ export function useRegisterUser() {
 }
 
 export function useLogoutUser() {
-    const xsrfToken = getCookie('XSRF-TOKEN');
     const logoutUser = useUserStore(state => state.logoutUser)
 
     return useMutation({
         mutationFn: async () => {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/logout`, {
+            const response = await baseFetch(`${import.meta.env.VITE_API_URL}/api/logout`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-XSRF-TOKEN": xsrfToken || ""
-                },
                 credentials: "include",
             })
 
@@ -116,19 +97,18 @@ export function useLogoutUser() {
 }
 
 export function useGetUserInfo() {
-    const xsrfToken = getCookie('XSRF-TOKEN');
     const loginUser = useUserStore(state => state.loginUser)
-
     return useQuery({
         queryKey: ['get-user-data'],
         queryFn: async () => {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-XSRF-TOKEN": xsrfToken || ""
-                },
-                credentials: "include",
-            })
+            const response = await baseFetch(`${import.meta.env.VITE_API_URL}/api/user`, {
+                method: "GET",
+            });
+
+            if (response.status === 401) {
+                loginUser(null)
+                throw new Error("Sessione scaduta")
+            }
 
             if (!response.ok) {
                 toast.error("Errore durante recupero dei dati dell'utente!")
@@ -136,6 +116,7 @@ export function useGetUserInfo() {
             }
 
             const result: GetUserDataResponse = await response.json()
+
 
 
             if (!result.loggedUser) {
@@ -148,5 +129,6 @@ export function useGetUserInfo() {
 
             return result.loggedUser
         },
+        refetchOnWindowFocus: true,
     })
 }

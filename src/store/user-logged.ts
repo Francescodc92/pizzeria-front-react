@@ -1,13 +1,13 @@
-import type { User } from "@/types/auth-user";
+import type { User, UserAddress } from "@/types/auth-user";
 import { create } from "zustand";
 import { persist } from 'zustand/middleware';
 
 interface UseUserStore {
     loggedUser: User | null
-    selectedDeliveryAddress: number | null;
-    loginUser: (user: User) => void
+    selectedDeliveryAddress: UserAddress | null;
+    loginUser: (user: User | null) => void
     logoutUser: () => void;
-    selectDeliveryAddress: (addressId: number | null) => void;
+    selectDeliveryAddress: (address: UserAddress | null) => void;
 }
 
 export const useUserStore = create(persist<UseUserStore>(
@@ -22,8 +22,8 @@ export const useUserStore = create(persist<UseUserStore>(
             return set(() => ({ loggedUser: null }))
         },
 
-        selectDeliveryAddress: (addressId: number | null) => {
-            return set(() => ({ selectedDeliveryAddress: addressId }))
+        selectDeliveryAddress: (address: UserAddress | null) => {
+            return set(() => ({ selectedDeliveryAddress: address }))
         },
 
     }),
